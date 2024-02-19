@@ -1,24 +1,74 @@
 <template>
-    <body>
-        <div id="movieDetails" class="movieDetails">
-        <!-- Contenedor para texto e imagen -->
-        <div class="text-image-container">
-            <!-- Aquí puedes mostrar la información de la película, incluida la imagen -->
-            <div id="movieImage" class="image-container">
-                <div class="gradient-overlay"></div>
-                <img src="/imagenes/tu-imagen.jpg" class="image" alt="Nombre de la película">
-            </div>
-            <div class="text-container">
-                <h1 id="movieTitle">Título de la Película</h1>
-                <p id="movieDescription">Descripción de la película.</p>
-                <!-- Otros detalles de la película... -->
-            </div>
-        </div>
-        <button id="boton">Comprar</button>
+  <div class="general" v-if="pelicula">
+    <div id="movieDetails" class="movieDetails">
+      <!-- Div para la informacion de lka pelicula -->
+      <div class="text-container">
+        <img v-if="pelicula.imagen" :src="`multimedia/${pelicula.imagen}`" class="image" :alt="pelicula.titulo">
+      </div>
+      <div class="text-container">
+        <h1 id="movieTitle">{{ pelicula.titulo }}</h1>
+        <p id="movieDescription">{{ pelicula.descripcion }}</p>
+      </div>
+      <button id="boton">Comprar</button>
     </div>
-    </body>
+  </div>
 </template>
-<style>
+
+<script lang="ts">
+import { defineComponent, ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+
+export default defineComponent({
+  setup() {
+    const pelicula = ref(null);
+    const isLoading = ref(false);
+    const route = useRoute();
+
+    const CargaPelicula = async () => {
+      isLoading.value = true;
+      try {
+        const IdPelicula = route.query.movieId;
+        const response = await fetch(`http://localhost:8001/Pelicula/${IdPelicula}`);
+        pelicula.value = await response.json();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        isLoading.value = false;
+      }
+    };
+
+    onMounted(CargaPelicula);
+    return { pelicula, isLoading };
+  },
+});
+</script>
+
+
+
+<style scoped>
+a {
+  text-decoration: none;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+
+a:hover {
+  transform: scale(1.1);
+}
+
+.left,
+.right {
+  margin: 20px 40px;
+}
+
+
+.general{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+  background-color: black; 
+}
+
 body {
   font-family: "HelveticaThin";
   margin: 0;
@@ -45,8 +95,7 @@ body {
 .image {
   position: relative;
   overflow: hidden;
-  border-radius: 10px; /* O cualquier otro estilo que desees */
-  /* Establece el tamaño y posición de la imagen */
+  border-radius: 10px; 
   width: 100%;
   height: auto;
 }
@@ -71,7 +120,7 @@ body {
   font-size: 18px;
 }
 
-/* Media query para pantallas más pequeñas */
+
 @media screen and (max-width: 767px) {
   /* HEADER*/
   body {
@@ -107,8 +156,8 @@ body {
     text-align: center;
   }
   .right ul {
-    padding: 0; /* Elimina el relleno predeterminado del ul */
-    margin: 0; /* Elimina el margen predeterminado del ul */
+    padding: 0;
+    margin: 0;
   }
   .right li {
     margin: 10px;
@@ -161,7 +210,7 @@ body {
     margin-top: 10px;
   }
   .image {
-    display: none; /* Oculta la imagen en dispositivos móviles */
+    display: none; 
   }
 }
 </style>

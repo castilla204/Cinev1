@@ -45,6 +45,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router'; 
 
 export default defineComponent({
   setup() {
@@ -53,13 +54,13 @@ export default defineComponent({
     const CargarSubtitulo = ref(false);
     const primeraFila = ref([]);
     const segundaFila = ref([]);
+    const router = useRouter(); 
 
     const loadMovies = async () => {
       isLoading.value = true;
       try {
         const response = await fetch('http://localhost:8001/Pelicula');
         peliculas.value = await response.json();
-        // Llamar a la función DividirPeliculasEnFilas después de cargar las películas
         DividirPeliculasEnFilas();
       } catch (error) {
         console.error(error);
@@ -88,7 +89,7 @@ export default defineComponent({
     };
 
     const RedirigirInfopeli = (movieId: string, index: number) => {
-      window.location.href = `/infopeli.html?movieId=${movieId}`;
+      router.push({ name: 'InfoPelicula', query: { movieId: movieId } });
     };
 
     return { primeraFila, segundaFila, isLoading, AccionScrollDown, RedirigirInfopeli, CargarSubtitulo };
@@ -98,11 +99,12 @@ export default defineComponent({
 
 
 <style scoped>
-.template{
-    background: rgb(0, 0, 0);
-}
-.general{
-  height: 100%;
+
+.general {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+  background-color: black; 
 }
 
 
@@ -189,7 +191,7 @@ body {
   margin-left: 10%;
   color: white;
   text-align: left;
-  font-size: 20px; /* Change this to adjust font size */
+  font-size: 20px; 
   margin-bottom: 0%;
 }
 
