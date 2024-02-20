@@ -1,5 +1,6 @@
 <template>
   <div class="general">
+    <!--Home-->
     <div class="home">
       <div class="izquierda">
         <img :src="'multimedia/fotopalomitas.png'" alt="Palomitas de maíz">
@@ -13,22 +14,20 @@
         </div>
       </div>
     </div>
+    <!--Cartelera-->
     <section class="cartelera">
-      <div id="movieInfo"></div>
       <div id="ticketForm">
         <h1 class="titulocartelera">CARTELERA</h1>
         <p class="subtitulo1cartelera">CINE PARA TODA LA FAMILIA</p>
         <div class="linearoja"></div>
-        <div class="peliculas" id="movieContainer">
-
-
+        <div class="contenedorpeliculas" id="contenedorpeliculas">
           <!-- Cargar las primeras 5 películas -->
           <div class="movie-group">
             <img v-for="(movie, index) in primeraFila" :key="movie.id" :src="'multimedia/' + movie.imagen" :alt="movie.titulo" @click="RedirigirInfopeli(movie.id, index)" class="movie-image rounded-image">
           </div>
 
 
-          <!-- Mostrar el subtítulo si hay mas de 5 peliculas -->
+          <!-- Mostrar el subtítulo si hay mas de 5 contenedorpeliculas -->
           <div v-if="CargarSubtitulo" class="subtitulo-group">
             <p class="subtitulo1cartelera">NUEVAS PELÍCULAS</p>
             <div class="linearoja"></div>
@@ -61,7 +60,7 @@ export default defineComponent({
       try {
         const response = await fetch('http://localhost:8001/Pelicula');
         peliculas.value = await response.json();
-        DividirPeliculasEnFilas();
+        DividirpeliculasEnFilas();
       } catch (error) {
         console.error(error);
       } finally {
@@ -71,7 +70,7 @@ export default defineComponent({
 
     onMounted(loadMovies);
 
-    const DividirPeliculasEnFilas = () => {
+    const DividirpeliculasEnFilas = () => {
       if (peliculas.value.length >= 5) {
         CargarSubtitulo.value = true;
         primeraFila.value = peliculas.value.slice(0, 5);
@@ -82,9 +81,9 @@ export default defineComponent({
     };
 
     const AccionScrollDown = () => {
-      const peliculasSection = document.querySelector('.peliculas');
-      if (peliculasSection) {
-        peliculasSection.scrollIntoView({ behavior: 'smooth' });
+      const contenedorpeliculas = document.querySelector('.contenedorpeliculas');
+      if (contenedorpeliculas) {
+        contenedorpeliculas.scrollIntoView({ behavior: 'smooth' });
       }
     };
 
@@ -202,7 +201,7 @@ body {
   background-color: darkred;
 }
 
-.peliculas img {
+.contenedorpeliculas img {
   width: 13%;
   margin: 30px;
 }
