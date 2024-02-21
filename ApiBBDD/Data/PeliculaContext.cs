@@ -101,13 +101,13 @@ namespace ApiPeliculas.Data
                     SesionID=1,
                     PeliculaID=1,
                     SalaID=1,
-                    FechaHora=new DateTime(2024, 2, 30, 21, 30, 0)
+                    FechaHora=new DateTime(2024, 2, 29, 21, 30, 0)
                 },
                 new Sesion{
                     SesionID=2,
                     PeliculaID=2,
                     SalaID=2,
-                    FechaHora=new DateTime(2024, 2, 31, 19, 0, 0)
+                    FechaHora=new DateTime(2024, 2, 28, 19, 0, 0)
                 }
             );
         
