@@ -3,6 +3,7 @@ using ApiPeliculas.Business.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ApiPeliculas.Modelos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<PeliculaContext>(options =>
     options.UseSqlServer(connectionString));
 
-
+builder.Services.AddScoped<IButacaData, ButacaData>();
+builder.Services.AddScoped<IButacaService, ButacaService>();
 
 builder.Services.AddScoped<IPeliculaData, PeliculaData>();
 builder.Services.AddScoped<IPeliculaService, PeliculaService>();

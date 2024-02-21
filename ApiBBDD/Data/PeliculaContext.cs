@@ -14,7 +14,7 @@ namespace ApiPeliculas.Data
             modelBuilder.Entity<Pelicula>().HasData(
                 new Pelicula
                 {
-                    Id = 1,
+                    PeliculaId = 1,
                     Imagen = "1.jpg",
                     Titulo = "THE MEG 2",
                     Director = "Jon Turtle",
@@ -23,7 +23,7 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 2,
+                    PeliculaId = 2,
                     Imagen = "2.png",
                     Titulo = "EL HOYO",
                     Director = "Galder Gaztelu-Urrutia",
@@ -32,7 +32,7 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 3,
+                    PeliculaId = 3,
                     Imagen = "3.png",
                     Titulo = "SUPER MARIO BROS",
                     Director = "Martin Scorsese",
@@ -41,7 +41,7 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 4,
+                    PeliculaId = 4,
                     Imagen = "4.png",
                     Titulo = "GRAN TURISMO",
                     Director = "Quentin Tarantino",
@@ -50,7 +50,7 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 5,
+                    PeliculaId = 5,
                     Imagen = "5.jpg",
                     Titulo = "THE MEG 2",
                     Director = "Alfred Hitchcock",
@@ -59,7 +59,7 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 6,
+                    PeliculaId = 6,
                     Imagen = "6.png",
                     Titulo = "EL HOYO",
                     Director = "Ben Wheatley",
@@ -68,7 +68,7 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 7,
+                    PeliculaId = 7,
                     Imagen = "7.png",
                     Titulo = "SUPER MARIO BROS",
                     Director = "Alfred Hitchcock",
@@ -77,7 +77,7 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 8,
+                    PeliculaId = 8,
                     Imagen = "8.png",
                     Titulo = "GRAN TURISMO",
                     Director = "Quentin Tarantino",
@@ -86,7 +86,7 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 9,
+                    PeliculaId = 9,
                     Imagen = "9.png",
                     Titulo = "SUPERMARIO BROS",
                     Director = "Ben Wheatley",
@@ -95,17 +95,35 @@ namespace ApiPeliculas.Data
                 },
                 new Pelicula
                 {
-                    Id = 10,
+                    PeliculaId = 10,
                     Imagen = "10.png",
                     Titulo = "GRAN TURISMO",
                     Director = "Quentin Tarantino",
                     Actores = "Meryl Streep",
                     Descripcion = "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'."
                 }
+
+                
+            );
+
+            modelBuilder.Entity<Butaca>().HasData(
+                new Butaca{
+                    ButacaId=1,
+                    Estado=EstadoButaca.Disponible
+                },
+                    new Butaca{
+                    ButacaId=2,
+                    Estado=EstadoButaca.Reservada
+                },
+                    new Butaca{
+                    ButacaId=3,
+                    Estado=EstadoButaca.Ocupada
+                }
             );
 
             base.OnModelCreating(modelBuilder);
         }
          public DbSet<Pelicula> Peliculas { get; set; }
+         public DbSet<Butaca> Butacas { get; set; }
     }
 }

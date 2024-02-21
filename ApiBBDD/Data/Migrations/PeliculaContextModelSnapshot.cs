@@ -21,6 +21,39 @@ namespace Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ApiPeliculas.Modelos.Butaca", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Butacas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Estado = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Estado = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Estado = 2
+                        });
+                });
+
             modelBuilder.Entity("ApiPeliculas.Modelos.Pelicula", b =>
                 {
                     b.Property<int>("Id")

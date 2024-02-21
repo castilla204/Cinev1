@@ -6,7 +6,7 @@ namespace ApiPeliculas.Modelos{
 public class Pelicula
 {
 
-    public int Id { get; set; }
+    public int PeliculaId { get; set; }
 
     public string Imagen { get; set; }
 
