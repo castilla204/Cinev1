@@ -32,8 +32,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+
+
 builder.Services.AddDbContext<PeliculaContext>(options =>
-    options.UseSqlServer(connectionString));
+options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<ISesionData, SesionData>();
+builder.Services.AddScoped<ISesionService, SesionService>();
+
 
 builder.Services.AddScoped<IButacaData, ButacaData>();
 builder.Services.AddScoped<IButacaService, ButacaService>();

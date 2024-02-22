@@ -8,5 +8,5 @@ public class Usuario
     public RolAlumno Rol { get; set; } 
 
     // Propiedad de navegación
-    public ICollection<Reserva> Reservas { get; set; } //Un Usuario puede tener muchas Reservas
+    public virtual ICollection<Reserva> Reservas { get; set; }=new HashSet<Reserva>(); //Un Usuario puede tener muchas Reservas
 }}
