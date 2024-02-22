@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(PeliculaContext))]
-    [Migration("20240221204642_contextconrelacciones2")]
-    partial class contextconrelacciones2
+    [Migration("20240222125920_MigracionInicial")]
+    partial class MigracionInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -348,7 +348,7 @@ namespace Data.Migrations
                     b.HasOne("ApiPeliculas.Modelos.Sala", "Sala")
                         .WithMany("Butacas")
                         .HasForeignKey("SalaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Sala");
@@ -359,19 +359,19 @@ namespace Data.Migrations
                     b.HasOne("ApiPeliculas.Modelos.Butaca", "Butaca")
                         .WithMany("Reservas")
                         .HasForeignKey("ButacaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApiPeliculas.Modelos.Sesion", "Sesion")
                         .WithMany("Reservas")
                         .HasForeignKey("SesionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApiPeliculas.Modelos.Usuario", "Usuario")
                         .WithMany("Reservas")
                         .HasForeignKey("UsuarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Butaca");
@@ -386,13 +386,13 @@ namespace Data.Migrations
                     b.HasOne("ApiPeliculas.Modelos.Pelicula", "Pelicula")
                         .WithMany("Sesiones")
                         .HasForeignKey("PeliculaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApiPeliculas.Modelos.Sala", "Sala")
                         .WithMany("Sesiones")
                         .HasForeignKey("SalaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Pelicula");

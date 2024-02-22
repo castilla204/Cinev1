@@ -5,60 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class contextconrelacciones2 : Migration
+    public partial class MigracionInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Butacas",
-                table: "Butacas");
-
-            migrationBuilder.DeleteData(
-                table: "Butacas",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Butacas",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Butacas",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "Peliculas",
-                newName: "PeliculaID");
-
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "Butacas",
-                newName: "SalaID");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "SalaID",
-                table: "Butacas",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int")
-                .OldAnnotation("SqlServer:Identity", "1, 1");
-
-            migrationBuilder.AddColumn<int>(
-                name: "ButacaID",
-                table: "Butacas",
-                type: "int",
-                nullable: false,
-                defaultValue: 0)
-                .Annotation("SqlServer:Identity", "1, 1");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Butacas",
-                table: "Butacas",
-                column: "ButacaID");
+            migrationBuilder.CreateTable(
+                name: "Peliculas",
+                columns: table => new
+                {
+                    PeliculaID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Director = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Actores = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Peliculas", x => x.PeliculaID);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Salas",
@@ -90,6 +56,26 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Butacas",
+                columns: table => new
+                {
+                    ButacaID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Estado = table.Column<int>(type: "int", nullable: false),
+                    SalaID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Butacas", x => x.ButacaID);
+                    table.ForeignKey(
+                        name: "FK_Butacas_Salas_SalaID",
+                        column: x => x.SalaID,
+                        principalTable: "Salas",
+                        principalColumn: "SalaID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Sesiones",
                 columns: table => new
                 {
@@ -107,13 +93,13 @@ namespace Data.Migrations
                         column: x => x.PeliculaID,
                         principalTable: "Peliculas",
                         principalColumn: "PeliculaID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Sesiones_Salas_SalaID",
                         column: x => x.SalaID,
                         principalTable: "Salas",
                         principalColumn: "SalaID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,30 +120,46 @@ namespace Data.Migrations
                         column: x => x.ButacaID,
                         principalTable: "Butacas",
                         principalColumn: "ButacaID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reservas_Sesiones_SesionID",
                         column: x => x.SesionID,
                         principalTable: "Sesiones",
                         principalColumn: "SesionID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reservas_Usuarios_UsuarioID",
                         column: x => x.UsuarioID,
                         principalTable: "Usuarios",
                         principalColumn: "UsuarioID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Peliculas",
+                columns: new[] { "PeliculaID", "Actores", "Descripcion", "Director", "Imagen", "Titulo" },
+                values: new object[,]
+                {
+                    { 1, "Philipe Marcus", "Es una película de acción y ciencia ficción dirigida por Jon Turteltaub y estrenada en 2018. La trama gira en torno a un grupo de científicos que deben detener a un megalodón.", "Jon Turtle", "1.jpg", "THE MEG 2" },
+                    { 2, "Martin Scorsese", "Es una película de ciencia ficción española dirigida por Galder Gaztelu-Urrutia, lanzada en 2019. La película se centra en un centro de reclusión vertical donde los prisioneros están dispuestos en celdas apiladas, y una plataforma de comida desciende a través de los niveles, dejando a los prisioneros de los niveles superiores con menos comida.", "Galder Gaztelu-Urrutia", "2.png", "EL HOYO" },
+                    { 3, "Leonardo DiCaprio", "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.", "Martin Scorsese", "3.png", "SUPER MARIO BROS" },
+                    { 4, "Meryl Streep", "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.", "Quentin Tarantino", "4.png", "GRAN TURISMO" },
+                    { 5, "Philipe Marcus", "Es una película de acción y ciencia ficción dirigida por Jon Turteltaub y estrenada en 2018. La trama gira en torno a un grupo de científicos que deben detener a un megalodón.", "Alfred Hitchcock", "5.jpg", "THE MEG 2" },
+                    { 6, "Julia Roberts", "Es una película de ciencia ficción española dirigida por Galder Gaztelu-Urrutia, lanzada en 2019. La película se centra en un centro de reclusión vertical donde los prisioneros están dispuestos en celdas apiladas, y una plataforma de comida desciende a través de los niveles, dejando a los prisioneros de los niveles superiores con menos comida.", "Ben Wheatley", "6.png", "EL HOYO" },
+                    { 7, "Leonardo DiCaprio", "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.", "Alfred Hitchcock", "7.png", "SUPER MARIO BROS" },
+                    { 8, "Meryl Streep", "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.", "Quentin Tarantino", "8.png", "GRAN TURISMO" },
+                    { 9, "Leonardo DiCaprio", "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.", "Ben Wheatley", "9.png", "SUPERMARIO BROS" },
+                    { 10, "Meryl Streep", "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.", "Quentin Tarantino", "10.png", "GRAN TURISMO" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Salas",
                 columns: new[] { "SalaID", "NombreSala" },
-                values: new object[] { 1, "Sala 1" });
-
-            migrationBuilder.InsertData(
-                table: "Salas",
-                columns: new[] { "SalaID", "NombreSala" },
-                values: new object[] { 2, "Sala 2" });
+                values: new object[,]
+                {
+                    { 1, "Sala 1" },
+                    { 2, "Sala 2" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
@@ -222,24 +224,15 @@ namespace Data.Migrations
                 name: "IX_Sesiones_SalaID",
                 table: "Sesiones",
                 column: "SalaID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Butacas_Salas_SalaID",
-                table: "Butacas",
-                column: "SalaID",
-                principalTable: "Salas",
-                principalColumn: "SalaID",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Butacas_Salas_SalaID",
-                table: "Butacas");
-
             migrationBuilder.DropTable(
                 name: "Reservas");
+
+            migrationBuilder.DropTable(
+                name: "Butacas");
 
             migrationBuilder.DropTable(
                 name: "Sesiones");
@@ -248,53 +241,10 @@ namespace Data.Migrations
                 name: "Usuarios");
 
             migrationBuilder.DropTable(
+                name: "Peliculas");
+
+            migrationBuilder.DropTable(
                 name: "Salas");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Butacas",
-                table: "Butacas");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Butacas_SalaID",
-                table: "Butacas");
-
-            migrationBuilder.DropColumn(
-                name: "ButacaID",
-                table: "Butacas");
-
-            migrationBuilder.RenameColumn(
-                name: "PeliculaID",
-                table: "Peliculas",
-                newName: "Id");
-
-            migrationBuilder.RenameColumn(
-                name: "SalaID",
-                table: "Butacas",
-                newName: "Id");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "Butacas",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int")
-                .Annotation("SqlServer:Identity", "1, 1");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Butacas",
-                table: "Butacas",
-                column: "Id");
-
-            migrationBuilder.InsertData(
-                table: "Butacas",
-                columns: new[] { "Id", "Estado" },
-                values: new object[] { 2, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Butacas",
-                columns: new[] { "Id", "Estado" },
-                values: new object[] { 3, 2 });
         }
     }
 }

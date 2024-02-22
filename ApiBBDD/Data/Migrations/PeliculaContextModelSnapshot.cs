@@ -346,7 +346,7 @@ namespace Data.Migrations
                     b.HasOne("ApiPeliculas.Modelos.Sala", "Sala")
                         .WithMany("Butacas")
                         .HasForeignKey("SalaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Sala");
@@ -357,19 +357,19 @@ namespace Data.Migrations
                     b.HasOne("ApiPeliculas.Modelos.Butaca", "Butaca")
                         .WithMany("Reservas")
                         .HasForeignKey("ButacaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApiPeliculas.Modelos.Sesion", "Sesion")
                         .WithMany("Reservas")
                         .HasForeignKey("SesionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApiPeliculas.Modelos.Usuario", "Usuario")
                         .WithMany("Reservas")
                         .HasForeignKey("UsuarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Butaca");
@@ -384,13 +384,13 @@ namespace Data.Migrations
                     b.HasOne("ApiPeliculas.Modelos.Pelicula", "Pelicula")
                         .WithMany("Sesiones")
                         .HasForeignKey("PeliculaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApiPeliculas.Modelos.Sala", "Sala")
                         .WithMany("Sesiones")
                         .HasForeignKey("SalaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Pelicula");
