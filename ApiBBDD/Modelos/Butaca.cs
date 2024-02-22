@@ -11,10 +11,10 @@ public class Butaca{
 
 
         // Propiedad de navegación
-        public virtual ICollection<Reserva> Reservas { get; set; }= new HashSet<Reserva>();// Una Butaca puede tener muchas Reservas
+        public  ICollection<Reserva> Reservas { get; set; }= new HashSet<Reserva>();// Una Butaca puede tener muchas Reservas
 
         // Propiedad de navegación inversa: Una Butaca pertenece a una Sala
-        public virtual Sala Sala { get; set; }
+        public  Sala Sala { get; set; }
 }
 
 }

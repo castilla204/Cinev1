@@ -13,12 +13,21 @@ _context=context;
 
 }
 public List<Sesion> ObtenerSesiones(){
-return _context.Sesiones.ToList();
-    
+var sesiones = _context.Sesiones
+    .Include(s => s.Pelicula)
+    .Include(s => s.Sala)
+    .Include(s => s.Reservas) 
+    .ToList();
+    return sesiones;
 }
 
 public Sesion ObtenerSesion(int id){
-       return _context.Sesiones.Find(id);
+    var sesion= _context.Sesiones.
+              Include(s => s.Pelicula)
+              .Include(s => s.Sala)
+              .Include(s => s.Reservas)
+              .FirstOrDefault(s => s.SesionID == id );
+      return sesion;
 }
 
 

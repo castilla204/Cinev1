@@ -17,7 +17,7 @@ public ActionResult<List<Sesion>> ObtenerSesiones(){
 }
 
 [HttpGet("{id}")]
-public ActionResult<Sesion> ObtenerSesion([FromBody]int id){
+public ActionResult<Sesion> ObtenerSesion(int id){
 return _sesionService.ObtenerSesion(id);
 }
 

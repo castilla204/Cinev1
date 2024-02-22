@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(PeliculaContext))]
-    [Migration("20240222173442_MigracionCargaDiferidaOn")]
-    partial class MigracionCargaDiferidaOn
+    [Migration("20240222192232_MigracionSinCargaDiferida")]
+    partial class MigracionSinCargaDiferida
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

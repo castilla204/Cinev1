@@ -4,7 +4,7 @@
 
 namespace Data.Migrations
 {
-    public partial class MigracionCargaDiferidaConLimite : Migration
+    public partial class MigracionSinCargaDiferida : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -12,8 +12,8 @@ namespace ApiPeliculas.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies(); // Habilitar carga diferida
-             optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); // Limitar la profundidad de carga
+            optionsBuilder.UseLazyLoadingProxies(false);
+            // optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); // Limitar la profundidad de carga
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

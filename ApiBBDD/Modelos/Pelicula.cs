@@ -18,5 +18,5 @@ public class Pelicula
     public string Descripcion {get; set;}
 
     // Propiedad de navegacion
-    public virtual ICollection<Sesion> Sesiones { get; set; }=new HashSet<Sesion>();// Una Película puede tener muchas Sesiones
+    public  ICollection<Sesion> Sesiones { get; set; }=new HashSet<Sesion>();// Una Película puede tener muchas Sesiones
 }}

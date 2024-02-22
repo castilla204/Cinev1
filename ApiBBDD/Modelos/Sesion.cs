@@ -8,9 +8,9 @@ public class Sesion
 
 
     //Propiedades de Navegacion
-    public virtual Pelicula Pelicula { get; set; }//una sesion puede tener una pelicula asignada
-    public virtual Sala Sala { get; set; }//una sesion puede tener una sala asignada
-    public virtual ICollection<Reserva> Reservas { get; set; } = new HashSet<Reserva>();//Una sesion puede tener muchas reservas
+    public  Pelicula Pelicula { get; set; }//una sesion puede tener una pelicula asignada
+    public  Sala Sala { get; set; }//una sesion puede tener una sala asignada
+    public  ICollection<Reserva> Reservas { get; set; } = new HashSet<Reserva>();//Una sesion puede tener muchas reservas
 
 
     
