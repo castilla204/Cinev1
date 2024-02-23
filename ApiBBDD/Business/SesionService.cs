@@ -10,8 +10,9 @@ _sesionData=sesionData;
 }
 
 
-public List<Sesion> ObtenerSesiones(){
-return _sesionData.ObtenerSesiones();
+public List<SesionDTO> ObtenerSesiones(){
+return _sesionData.ObtenerSesionesDTO();
+
 
 }
 

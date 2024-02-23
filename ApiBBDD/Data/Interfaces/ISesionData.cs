@@ -1,5 +1,5 @@
 using ApiPeliculas.Modelos;
 public interface ISesionData{
-public List<Sesion> ObtenerSesiones();
+public List<SesionDTO> ObtenerSesionesDTO();
 public Sesion ObtenerSesion(int id);
 }

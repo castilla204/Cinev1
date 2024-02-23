@@ -12,7 +12,7 @@ public SesionController(ISesionService sesionService){
 _sesionService= sesionService;
 }
 [HttpGet]
-public ActionResult<List<Sesion>> ObtenerSesiones(){
+public ActionResult<List<SesionDTO>> ObtenerSesiones(){
     return _sesionService.ObtenerSesiones();
 }
 

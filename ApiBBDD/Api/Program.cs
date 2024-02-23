@@ -13,11 +13,10 @@ var connectionStringKey="ServerDB_Docker";
 connectionStringKey = isRunningInDocker ? "ServerDB_Docker" : "ServerDB_Local";
 var connectionString = builder.Configuration.GetConnectionString(connectionStringKey);
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;// Gracias a esta linea las relacciones Circulares no se producen
-    });
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.WriteIndented = true; // Para que se muestren los json mas legibles sin valores como $ o valores que no ineteresan
+});
 
 
 
