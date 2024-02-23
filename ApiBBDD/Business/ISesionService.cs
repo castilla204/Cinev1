@@ -4,5 +4,6 @@ public interface ISesionService{
     
 public List<SesionDTO> ObtenerSesiones();
 
-public Sesion ObtenerSesion(int id);
+public SesionDTO ObtenerSesion(int id);
+public void CrearSesion(SesionCrearDTO sesionDTO);
 }}

@@ -16,8 +16,12 @@ return _sesionData.ObtenerSesionesDTO();
 
 }
 
-public Sesion ObtenerSesion(int id){
+public SesionDTO ObtenerSesion(int id){
 return _sesionData.ObtenerSesion(id);
+}
+
+public void CrearSesion(SesionCrearDTO sesionDTO){
+_sesionData.CrearSesion(sesionDTO);
 }
 }
 

@@ -34,14 +34,43 @@ public List<SesionDTO> ObtenerSesionesDTO()
 
     return sesionesDTO;
 }
-public Sesion ObtenerSesion(int id){
-    var sesion= _context.Sesiones.
-              Include(s => s.Pelicula)
-              .Include(s => s.Sala)
-              .Include(s => s.Reservas)
-              .FirstOrDefault(s => s.SesionID == id );
-      return sesion;
+public SesionDTO ObtenerSesion(int id)
+{
+    var sesionDTO = _context.Sesiones
+        .Where(s => s.SesionID == id) // Filtra por el ID de la sesion
+        .Include(s => s.Pelicula)
+        .Include(s => s.Sala)
+        .ThenInclude(sala => sala.Butacas)
+        .Select(s => new SesionDTO
+        {
+            SesionID = s.SesionID,
+            FechaHora = s.FechaHora,
+            TituloPelicula = s.Pelicula.Titulo,
+            NombreSala = s.Sala.NombreSala,
+            ImagenPelicula= s.Pelicula.Imagen,
+            ButacasOcupadasIds = s.Sala.Butacas
+                                  .Where(b => b.Estado == EstadoButaca.Ocupada)
+                                  .Select(b => b.ButacaID)
+                                  .ToList() // Obtiene la lista de IDs de butacas ocupadas
+        })
+        .FirstOrDefault(); 
+
+    return sesionDTO;
 }
 
+public void CrearSesion(SesionCrearDTO sesionDTO)
+        {
+       
+                var nuevaSesion = new Sesion
+                    {
+                        FechaHora = sesionDTO.FechaHora,
+                        PeliculaID = sesionDTO.PeliculaID,
+                        SalaID = sesionDTO.SalaID
+                    };
 
+                _context.Sesiones.Add(nuevaSesion);
+                _context.SaveChanges();
+           
+   
+            }
 }}

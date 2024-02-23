@@ -17,8 +17,15 @@ public ActionResult<List<SesionDTO>> ObtenerSesiones(){
 }
 
 [HttpGet("{id}")]
-public ActionResult<Sesion> ObtenerSesion(int id){
+public ActionResult<SesionDTO> ObtenerSesion(int id){
 return _sesionService.ObtenerSesion(id);
+}
+
+[HttpPost]
+public IActionResult CrearSesion([FromBody]SesionCrearDTO sesionDTO){
+_sesionService.CrearSesion(sesionDTO);
+return Ok("SesionCreada");
+
 }
 
 }
