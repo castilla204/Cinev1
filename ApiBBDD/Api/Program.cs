@@ -46,8 +46,8 @@ builder.Services.AddScoped<ISesionData, SesionData>();
 builder.Services.AddScoped<ISesionService, SesionService>();
 
 
-builder.Services.AddScoped<IButacaData, ButacaData>();
-builder.Services.AddScoped<IButacaService, ButacaService>();
+//builder.Services.AddScoped<IButacaData, ButacaData>();
+//builder.Services.AddScoped<IButacaService, ButacaService>();
 
 builder.Services.AddScoped<IPeliculaData, PeliculaData>();
 builder.Services.AddScoped<IPeliculaService, PeliculaService>();

@@ -21,7 +21,12 @@ return _sesionData.ObtenerSesion(id);
 }
 
 public void CrearSesion(SesionCrearDTO sesionDTO){
-_sesionData.CrearSesion(sesionDTO);
+var nuevaSesion = new Sesion{
+    FechaHora = sesionDTO.FechaHora,
+    PeliculaID = sesionDTO.PeliculaID,
+    SalaID = sesionDTO.SalaID
+    };
+_sesionData.CrearSesion(nuevaSesion);
 }
 }
 
