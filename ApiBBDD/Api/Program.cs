@@ -48,6 +48,9 @@ builder.Services.AddScoped<ISesionService, SesionService>();
 builder.Services.AddScoped<ISalaData, SalaData>();
 builder.Services.AddScoped<ISalaService, SalaService>();
 
+builder.Services.AddScoped<IUsuarioData, UsuarioData>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 builder.Services.AddScoped<IReservaData, ReservaData>();
 builder.Services.AddScoped<IReservaService, ReservaService>();
 

@@ -16,12 +16,15 @@ namespace ApiPeliculas.Data{
                 .Select(u => new UsuarioDTO{
                 UsuarioID=u.UsuarioID,
                 Nombre=u.Nombre,
+                Contrasena=u.Contrasena,
                 CorreoElectronico=u.CorreoElectronico,
+                Rol=u.Rol,
                 CantidadReservas=u.Reservas.Count
         }).ToList();
 
         return UsuariosDTO;
         }
+
 
     public UsuarioDTO ObtenerUsuario(int id){
     var usuario = _context.Usuarios
@@ -31,7 +34,9 @@ namespace ApiPeliculas.Data{
         {
             UsuarioID = u.UsuarioID,
             Nombre = u.Nombre,
+            Contrasena=u.Contrasena,
             CorreoElectronico = u.CorreoElectronico,
+            Rol=u.Rol,
             CantidadReservas = u.Reservas.Count
         })
         .FirstOrDefault();
