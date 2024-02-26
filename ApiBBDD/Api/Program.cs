@@ -45,6 +45,12 @@ options.UseSqlServer(connectionString));
 builder.Services.AddScoped<ISesionData, SesionData>();
 builder.Services.AddScoped<ISesionService, SesionService>();
 
+builder.Services.AddScoped<ISalaData, SalaData>();
+builder.Services.AddScoped<ISalaService, SalaService>();
+
+builder.Services.AddScoped<IReservaData, ReservaData>();
+builder.Services.AddScoped<IReservaService, ReservaService>();
+
 
 //builder.Services.AddScoped<IButacaData, ButacaData>();
 //builder.Services.AddScoped<IButacaService, ButacaService>();

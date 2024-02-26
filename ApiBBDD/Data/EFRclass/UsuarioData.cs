@@ -23,6 +23,28 @@ namespace ApiPeliculas.Data{
         return UsuariosDTO;
         }
 
+    public UsuarioDTO ObtenerUsuario(int id){
+    var usuario = _context.Usuarios
+        .Where(u => u.UsuarioID == id)
+        .Include(u => u.Reservas)
+        .Select(u => new UsuarioDTO
+        {
+            UsuarioID = u.UsuarioID,
+            Nombre = u.Nombre,
+            CorreoElectronico = u.CorreoElectronico,
+            CantidadReservas = u.Reservas.Count
+        })
+        .FirstOrDefault();
+
+    return usuario;
+}
+
+
+public void CrearUsuario(Usuario usuario){
+_context.Add(usuario);
+_context.SaveChanges();
+}
+
       
     }
 }
