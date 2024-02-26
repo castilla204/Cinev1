@@ -21,8 +21,8 @@ namespace ApiPeliculas.Business.Services
             {
                 ReservaID = r.ReservaID,
                 SesionID = r.SesionID,
-                ButacaID = r.ButacaID,
-                UsuarioID = r.UsuarioID
+                UsuarioID = r.UsuarioID,
+                ButacasIds = r.ReservaButacas.Select(rb => rb.ButacaID).ToList() 
             }).ToList();
         }
 
@@ -35,8 +35,8 @@ namespace ApiPeliculas.Business.Services
                 {
                     ReservaID = reserva.ReservaID,
                     SesionID = reserva.SesionID,
-                    ButacaID = reserva.ButacaID,
-                    UsuarioID = reserva.UsuarioID
+                    UsuarioID = reserva.UsuarioID,
+                    ButacasIds = reserva.ReservaButacas.Select(rb => rb.ButacaID).ToList() 
                 };
             }
             return null;
@@ -47,8 +47,8 @@ namespace ApiPeliculas.Business.Services
             var nuevaReserva = new Reserva
             {
                 SesionID = reservaCrearDTO.SesionID,
-                ButacaID = reservaCrearDTO.ButacaID,
-                UsuarioID = reservaCrearDTO.UsuarioID
+                UsuarioID = reservaCrearDTO.UsuarioID,
+                ReservaButacas = reservaCrearDTO.ButacasIds.Select(butacaId => new ReservaButaca { ButacaID = butacaId }).ToList() 
             };
             _reservaData.CrearReserva(nuevaReserva);
         }
@@ -59,7 +59,6 @@ namespace ApiPeliculas.Business.Services
             if (reservaExistente != null)
             {
                 reservaExistente.SesionID = reservaActualizarDTO.SesionID;
-                reservaExistente.ButacaID = reservaActualizarDTO.ButacaID;
                 reservaExistente.UsuarioID = reservaActualizarDTO.UsuarioID;
                 _reservaData.ActualizarReserva(reservaExistente);
             }

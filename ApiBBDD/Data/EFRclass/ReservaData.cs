@@ -17,18 +17,20 @@ namespace ApiPeliculas.Data
         public List<Reserva> ObtenerReservas()
         {
             return _context.Reservas
-            .Include(r => r.Sesion)
-            .Include(r => r.Butaca)
-            .Include(r => r.Usuario)
-            .ToList();
+                .Include(r => r.Sesion)
+                .Include(r => r.Usuario)
+                .Include(r => r.ReservaButacas) 
+                    .ThenInclude(rb => rb.Butaca) 
+                .ToList();
         }
 
         public Reserva ObtenerReservaPorId(int id)
         {
             return _context.Reservas
                 .Include(r => r.Sesion)
-                .Include(r => r.Butaca)
                 .Include(r => r.Usuario)
+                .Include(r => r.ReservaButacas) 
+                    .ThenInclude(rb => rb.Butaca) 
                 .FirstOrDefault(r => r.ReservaID == id);
         }
 

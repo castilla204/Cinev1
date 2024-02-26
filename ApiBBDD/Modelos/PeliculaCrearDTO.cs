@@ -1,7 +1,6 @@
 namespace ApiPeliculas.Modelos{
-public class PeliculaDTO
+public class PeliculaCrearDTO
 {
-    public int PeliculaID { get; set; }
     public string Imagen { get; set; }
 
     public string Titulo { get; set; }

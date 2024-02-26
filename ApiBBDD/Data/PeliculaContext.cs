@@ -162,23 +162,39 @@ namespace ApiPeliculas.Data
 
             
             );
+
             
             modelBuilder.Entity<Reserva>().HasData(
             new Reserva {
                 ReservaID = 1,
                 SesionID = 1,
-                ButacaID = 1,
                 UsuarioID = 1
            
             },
             new Reserva {
                 ReservaID = 2,
                 SesionID = 2,
-                ButacaID = 2,
                 UsuarioID = 1
           
             }
             );
+
+
+        modelBuilder.Entity<ReservaButaca>().HasData(
+            new ReservaButaca {
+                 ReservaID = 1, 
+                 ButacaID = 1 
+            },
+            new ReservaButaca { 
+                ReservaID = 1, 
+                ButacaID = 2 
+            },
+            new ReservaButaca { 
+            ReservaID = 2, 
+            ButacaID = 3 
+            }
+        );
+
 
         //Relacciones
             //Definiendo las claves Primarias
@@ -199,6 +215,9 @@ namespace ApiPeliculas.Data
 
             modelBuilder.Entity<Reserva>()
                 .HasKey(r => r.ReservaID);
+                        
+            modelBuilder.Entity<ReservaButaca>()
+                .HasKey(rb => new { rb.ReservaID, rb.ButacaID });
 
             // Definiendo las relaciones entre las entidades
 
@@ -232,7 +251,7 @@ namespace ApiPeliculas.Data
 
             // Butaca -> Reservas
             modelBuilder.Entity<Butaca>()
-                .HasMany(b => b.Reservas)
+                .HasMany(b => b.ReservaButacas)
                 .WithOne(r => r.Butaca)
                 .HasForeignKey(r => r.ButacaID)
                 .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
@@ -245,11 +264,23 @@ namespace ApiPeliculas.Data
                 .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
 
 
-            
+            //Relaccion muchos a miuchos desde Reserva a Butaca
+            modelBuilder.Entity<ReservaButaca>()
+                    .HasOne(rb => rb.Reserva)
+                    .WithMany(r => r.ReservaButacas)
+                    .HasForeignKey(rb => rb.ReservaID);
+
+            // Relaccion uno a muchos desde Butaca hacia ReservaButaca, 
+             modelBuilder.Entity<ReservaButaca>()
+                    .HasOne(rb => rb.Butaca)
+                    .WithMany(b => b.ReservaButacas)
+                    .HasForeignKey(rb => rb.ButacaID);
+                        
 
             base.OnModelCreating(modelBuilder);
         }
 
+        public DbSet<ReservaButaca> ReservaButacas { get; set; }
         public DbSet<Usuario> Usuarios {get; set;}
         public DbSet<Pelicula> Peliculas { get; set; }
         public DbSet<Sesion> Sesiones {get; set;}

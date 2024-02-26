@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class MigracionOptimizada : Migration
+    public partial class ReservaButacaMuchosAMuchos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,18 +108,11 @@ namespace Data.Migrations
                     ReservaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SesionID = table.Column<int>(type: "int", nullable: false),
-                    ButacaID = table.Column<int>(type: "int", nullable: false),
                     UsuarioID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reservas", x => x.ReservaID);
-                    table.ForeignKey(
-                        name: "FK_Reservas_Butacas_ButacaID",
-                        column: x => x.ButacaID,
-                        principalTable: "Butacas",
-                        principalColumn: "ButacaID",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reservas_Sesiones_SesionID",
                         column: x => x.SesionID,
@@ -132,6 +125,30 @@ namespace Data.Migrations
                         principalTable: "Usuarios",
                         principalColumn: "UsuarioID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReservaButacas",
+                columns: table => new
+                {
+                    ReservaID = table.Column<int>(type: "int", nullable: false),
+                    ButacaID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReservaButacas", x => new { x.ReservaID, x.ButacaID });
+                    table.ForeignKey(
+                        name: "FK_ReservaButacas_Butacas_ButacaID",
+                        column: x => x.ButacaID,
+                        principalTable: "Butacas",
+                        principalColumn: "ButacaID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ReservaButacas_Reservas_ReservaID",
+                        column: x => x.ReservaID,
+                        principalTable: "Reservas",
+                        principalColumn: "ReservaID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -317,13 +334,28 @@ namespace Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reservas",
-                columns: new[] { "ReservaID", "ButacaID", "SesionID", "UsuarioID" },
-                values: new object[] { 1, 1, 1, 1 });
+                columns: new[] { "ReservaID", "SesionID", "UsuarioID" },
+                values: new object[] { 1, 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "Reservas",
-                columns: new[] { "ReservaID", "ButacaID", "SesionID", "UsuarioID" },
-                values: new object[] { 2, 2, 2, 1 });
+                columns: new[] { "ReservaID", "SesionID", "UsuarioID" },
+                values: new object[] { 2, 2, 1 });
+
+            migrationBuilder.InsertData(
+                table: "ReservaButacas",
+                columns: new[] { "ButacaID", "ReservaID" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "ReservaButacas",
+                columns: new[] { "ButacaID", "ReservaID" },
+                values: new object[] { 2, 1 });
+
+            migrationBuilder.InsertData(
+                table: "ReservaButacas",
+                columns: new[] { "ButacaID", "ReservaID" },
+                values: new object[] { 3, 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Butacas_SalaID",
@@ -331,8 +363,8 @@ namespace Data.Migrations
                 column: "SalaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservas_ButacaID",
-                table: "Reservas",
+                name: "IX_ReservaButacas_ButacaID",
+                table: "ReservaButacas",
                 column: "ButacaID");
 
             migrationBuilder.CreateIndex(
@@ -359,10 +391,13 @@ namespace Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Reservas");
+                name: "ReservaButacas");
 
             migrationBuilder.DropTable(
                 name: "Butacas");
+
+            migrationBuilder.DropTable(
+                name: "Reservas");
 
             migrationBuilder.DropTable(
                 name: "Sesiones");

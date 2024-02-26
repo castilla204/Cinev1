@@ -775,9 +775,6 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservaID"), 1L, 1);
 
-                    b.Property<int>("ButacaID")
-                        .HasColumnType("int");
-
                     b.Property<int>("SesionID")
                         .HasColumnType("int");
 
@@ -785,8 +782,6 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ReservaID");
-
-                    b.HasIndex("ButacaID");
 
                     b.HasIndex("SesionID");
 
@@ -798,16 +793,46 @@ namespace Data.Migrations
                         new
                         {
                             ReservaID = 1,
-                            ButacaID = 1,
                             SesionID = 1,
                             UsuarioID = 1
                         },
                         new
                         {
                             ReservaID = 2,
-                            ButacaID = 2,
                             SesionID = 2,
                             UsuarioID = 1
+                        });
+                });
+
+            modelBuilder.Entity("ApiPeliculas.Modelos.ReservaButaca", b =>
+                {
+                    b.Property<int>("ReservaID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ButacaID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReservaID", "ButacaID");
+
+                    b.HasIndex("ButacaID");
+
+                    b.ToTable("ReservaButacas");
+
+                    b.HasData(
+                        new
+                        {
+                            ReservaID = 1,
+                            ButacaID = 1
+                        },
+                        new
+                        {
+                            ReservaID = 1,
+                            ButacaID = 2
+                        },
+                        new
+                        {
+                            ReservaID = 2,
+                            ButacaID = 3
                         });
                 });
 
@@ -933,12 +958,6 @@ namespace Data.Migrations
 
             modelBuilder.Entity("ApiPeliculas.Modelos.Reserva", b =>
                 {
-                    b.HasOne("ApiPeliculas.Modelos.Butaca", "Butaca")
-                        .WithMany("Reservas")
-                        .HasForeignKey("ButacaID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("ApiPeliculas.Modelos.Sesion", "Sesion")
                         .WithMany("Reservas")
                         .HasForeignKey("SesionID")
@@ -951,11 +970,28 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Butaca");
-
                     b.Navigation("Sesion");
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("ApiPeliculas.Modelos.ReservaButaca", b =>
+                {
+                    b.HasOne("ApiPeliculas.Modelos.Butaca", "Butaca")
+                        .WithMany("ReservaButacas")
+                        .HasForeignKey("ButacaID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ApiPeliculas.Modelos.Reserva", "Reserva")
+                        .WithMany("ReservaButacas")
+                        .HasForeignKey("ReservaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Butaca");
+
+                    b.Navigation("Reserva");
                 });
 
             modelBuilder.Entity("ApiPeliculas.Modelos.Sesion", b =>
@@ -979,12 +1015,17 @@ namespace Data.Migrations
 
             modelBuilder.Entity("ApiPeliculas.Modelos.Butaca", b =>
                 {
-                    b.Navigation("Reservas");
+                    b.Navigation("ReservaButacas");
                 });
 
             modelBuilder.Entity("ApiPeliculas.Modelos.Pelicula", b =>
                 {
                     b.Navigation("Sesiones");
+                });
+
+            modelBuilder.Entity("ApiPeliculas.Modelos.Reserva", b =>
+                {
+                    b.Navigation("ReservaButacas");
                 });
 
             modelBuilder.Entity("ApiPeliculas.Modelos.Sala", b =>

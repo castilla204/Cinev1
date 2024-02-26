@@ -17,7 +17,7 @@ namespace ApiPeliculas.Data{
                 {
                     SalaID = s.SalaID,
                     NombreSala = s.NombreSala,
-                    SesionesIds = s.Sesiones.Select(sess => sess.SesionID).ToList() // Solo se incluyen los IDs de las sesiones
+                    SesionesIds = s.Sesiones.Select(sess => sess.SesionID).ToList() 
                 }).ToList();
 
             return salasDTO;
