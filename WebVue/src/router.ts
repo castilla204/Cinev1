@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
 import HomePage from './components/Homepage.vue';
+import reservaButacas from './components/Butacas.vue'
 import InfoPelicula from './components/InfoPelicula.vue';
 import Butacas from './components/Butacas.vue';
 
@@ -17,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
     component: InfoPelicula,
   },
   { 
-    path:'/Butacas',
+    path:'/Butacas:sesionID',
     name: 'Butacas',
     component:Butacas,
   },

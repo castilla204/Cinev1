@@ -19,6 +19,7 @@ import { useRouter } from 'vue-router';
 import SesionesDisponibles from './SesionesDisponibles.vue';
 import { SesionesStore } from '../store/SesionStore';
 
+
 const pelicula = ref(null);
 const isLoading = ref(false);
 const router = useRouter();
@@ -35,7 +36,6 @@ const cargaPelicula = async () => {
     }
     const response = await fetch(`http://localhost:8001/Pelicula/${movieId}`);
     pelicula.value = await response.json();
-
     await almacenSesiones.ObtenerSesionesPelicula(movieId); //llamar al sesionstore de la libreria pinia a la funcion fetch 
   } catch (error) {
     console.error(error);
@@ -66,5 +66,12 @@ onMounted(cargaPelicula);
 
 .boton{
   height:30%;
+}
+
+#movieTitle{
+  font-family: 'Helvetica';
+}
+#titulosesiones{
+  font-family: 'Helvetica';
 }
 </style>

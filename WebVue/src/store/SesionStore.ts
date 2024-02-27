@@ -23,7 +23,9 @@ export const SesionesStore = defineStore({
           tituloPelicula: session.tituloPelicula,
           nombreSala: session.nombreSala,
           imagenPelicula: session.imagenPelicula,
+          descripcionPelicula: session.descripcionPelicula,
           butacasOcupadasIds: session.butacasOcupadasIds,
+
         }));
 
         this.sessions = sessions;

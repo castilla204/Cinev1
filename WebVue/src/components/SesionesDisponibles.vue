@@ -1,8 +1,8 @@
 <template>
   <div class="sesiones-container">
-    <h1>Sesiones Disponibles</h1>
-    <div v-for="(sesion, index) in sessions" :key="sesion.sesionID" class="sesion" :style="{ backgroundColor: sessionColors[index % sessionColors.length] }">
-      <div class="sesion-info">
+    <h1 id="titulosesiones">Sesiones Disponibles</h1>
+    <div v-for="(sesion, index) in sessions" :key="sesion.sesionID" class="sesion" :style="{ backgroundColor: sessionColors[index % sessionColors.length] }" @click="redirigirReserva(sesion.sesionID)">
+      <div class="sesion-info" >
         <p>{{ sesion.fechaHora }}</p>
         <p>{{ sesion.nombreSala }}</p>
       </div>
@@ -13,20 +13,21 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { SesionesStore } from '../store/SesionStore';
+import { useRouter } from 'vue-router'; // Importa el enrutador
 
-// Obtener las sesiones de la tienda
+const router = useRouter(); // Obtiene el enrutador
+
 const almacenSesiones = SesionesStore();
-
-// Definir una referencia reactiva para sessions
 const sessions = ref([]);
 
-// Observar cambios en el store y actualizar con los cambios
 watch(() => almacenSesiones.sessions, (newSessions) => {
   sessions.value = newSessions;
 });
 
-// Colores para las div de lsas sesiones
-const sessionColors = ['#FFC0CB', '#87CEEB', '#90EE90', '#FFD700', '#CD5C5C', '#FFA07A']; 
+const sessionColors = ['#9E2A2B', '#A93226', '#AF601A', '#B9770E', '#C68407', '#D4AC0D'];
+const redirigirReserva = (sesionID) => {
+  router.push({ name: 'Butacas', params: { sesionID: sesionID.toString() } });
+};
 </script>
 
 <style scoped>
@@ -34,13 +35,17 @@ const sessionColors = ['#FFC0CB', '#87CEEB', '#90EE90', '#FFD700', '#CD5C5C', '#
   flex-direction: column;
   align-items: center;
 }
-
+#titulosesiones{
+  font-family: 'Helvetica';
+}
 .sesion {
+  cursor: pointer; /* Cambia el cursor al pasar sobre las sesiones para indicar que son clicables */
   margin-bottom: 20px;
   border-radius: 10px;
   border: 1px solid #ccc;
   padding: 10px;
   width: 300px;
+  font-family: 'HelveticaThin';
 }
 
 .sesion-info {
