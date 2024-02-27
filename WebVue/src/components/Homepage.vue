@@ -18,7 +18,6 @@
   </template>
 <script>
 
-
 import Cartelera from './Cartelera.vue'; 
 
 export default {

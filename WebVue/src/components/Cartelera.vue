@@ -5,8 +5,8 @@
       <div class="linearoja"></div>
       <div class="contenedorpeliculas" id="contenedorpeliculas">
         <!-- Cargar las primeras 5 películas -->
-        <div class="movie-group">
-          <img v-for="(movie, index) in primeraFila" :key="movie.peliculaID" :src="'multimedia/' + movie.imagen" :alt="movie.titulo" @click="RedirigirInfopeli(movie.peliculaID)" class="movie-image rounded-image">
+        <div class="pelicula-group">
+          <img v-for="(pelicula, index) in primeraFila" :key="pelicula.peliculaID" :src="'multimedia/' + pelicula.imagen" :alt="pelicula.titulo" @click="RedirigirInfopeli(pelicula.peliculaID)" class="pelicula-image rounded-image">
         </div>
 
 
@@ -16,8 +16,8 @@
           <div class="linearoja"></div>
         </div>
         <!-- Cargar la segunda fila -->
-        <div class="movie-group">
-          <img v-for="(movie, index) in segundaFila" :key="movie.peliculaID" :src="'multimedia/' + movie.imagen" :alt="movie.titulo" @click="RedirigirInfopeli(movie.peliculaID)" class="movie-image rounded-image">
+        <div class="pelicula-group">
+          <img v-for="(pelicula, index) in segundaFila" :key="pelicula.peliculaID" :src="'multimedia/' + pelicula.imagen" :alt="pelicula.titulo" @click="RedirigirInfopeli(pelicula.peliculaID)" class="pelicula-image rounded-image">
         </div>
       </div>
     </div>
@@ -25,30 +25,30 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, computed } from 'vue';
-import { PeliculasStore } from '../store/index'; 
+import { PeliculasStore } from '../store/PeliculaStore'; 
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
-    const moviesStore = PeliculasStore();
+    const almacenPeliculas = PeliculasStore();
 
     onMounted(() => {
-      moviesStore.ObtenerPeliculas();
+      almacenPeliculas.ObtenerPeliculas();
     });
 
     const CargarSubtitulo = computed(() => {
-      return moviesStore.peliculas.length > 5;
+      return almacenPeliculas.peliculas.length > 5;
     });
 
     return {
-      primeraFila: computed(() => moviesStore.peliculas.slice(0, 5)),
-      segundaFila: computed(() => moviesStore.peliculas.slice(5)),
-      isLoading: computed(() => moviesStore.isLoading),
+      primeraFila: computed(() => almacenPeliculas.peliculas.slice(0, 5)),
+      segundaFila: computed(() => almacenPeliculas.peliculas.slice(5)),
+      isLoading: computed(() => almacenPeliculas.isLoading),
       CargarSubtitulo,
       RedirigirInfopeli: (movieId: number) => {
-        router.push({ name: 'InfoPelicula', query: { movieId: movieId.toString() } });
-      },
+  router.push({ name: 'InfoPelicula', params: { movieId: movieId.toString() } });
+},
     };
   },
 });
@@ -98,4 +98,4 @@ export default defineComponent({
   width: 100%;
   text-align: center;
 }
-</style>
+</style>../store/PeliculaStore
