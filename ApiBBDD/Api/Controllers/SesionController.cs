@@ -21,7 +21,7 @@ public ActionResult<SesionDTO> ObtenerSesion(int id){
 return _sesionService.ObtenerSesion(id);
 }
 
-[HttpGet("Sesion/{IdPelicula}")]
+[HttpGet("Pelicula/{IdPelicula}")]
 public List<SesionDTO> ObtenerSesionesPeli(int IdPelicula){
     return _sesionService.ObtenerSesionesPeli(IdPelicula);
 }
