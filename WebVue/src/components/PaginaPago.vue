@@ -1,5 +1,5 @@
 <template>
-<body>
+
     <div class="izq">
         <!-- Formulario con 3 campos -->
         <form>
@@ -42,9 +42,9 @@
     <a href="index.html"><button id="boton"> Comprar</button></a>
     
 
-</body>
 </template>
-<style>
+<style scoped>
+
 
 body {
   font-family: "Helvetica", sans-serif;
