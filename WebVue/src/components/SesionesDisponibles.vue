@@ -1,7 +1,7 @@
 <template>
   <div class="sesiones-container">
     <h1 id="titulosesiones">Sesiones Disponibles</h1>
-    <div v-for="(sesion, index) in sessions" :key="sesion.sesionID" class="sesion" :style="{ backgroundColor: sessionColors[index % sessionColors.length] }" @click="redirigirReserva(sesion.sesionID)">
+    <div v-for="(sesion, index) in sesiones" :key="sesion.sesionID" class="sesion" :style="{ backgroundColor: ColoresDivSesiones[index % ColoresDivSesiones.length] }" @click="redirigirReserva(sesion.sesionID)">
       <div class="sesion-info" >
         <p>{{ sesion.fechaHora }}</p>
         <p>{{ sesion.nombreSala }}</p>
@@ -13,20 +13,20 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { SesionesStore } from '../store/SesionStore';
-import { useRouter } from 'vue-router'; // Importa el enrutador
+import { useRouter } from 'vue-router'; 
 
-const router = useRouter(); // Obtiene el enrutador
+const router = useRouter(); 
 
 const almacenSesiones = SesionesStore();
-const sessions = ref([]);
+const sesiones = ref([]);
 
-watch(() => almacenSesiones.sessions, (newSessions) => {
-  sessions.value = newSessions;
+watch(() => almacenSesiones.sesiones, (nuevasSesiones) => {
+  sesiones.value = nuevasSesiones;
 });
 
-const sessionColors = ['#9E2A2B', '#A93226', '#AF601A', '#B9770E', '#C68407', '#D4AC0D'];
+const ColoresDivSesiones = ['#9E2A2B',  '#AF601A', '#B9770E', '#C68407', '#D4AC0D'];
 const redirigirReserva = (sesionID) => {
-  router.push({ name: 'Butacas', params: { sesionID: sesionID.toString() } });
+  router.push({ name: 'PaginaReserva', params: { sesionID: sesionID.toString() } });
 };
 </script>
 

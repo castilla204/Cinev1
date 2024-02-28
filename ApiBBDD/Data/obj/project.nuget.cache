@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wiE5fkm6ibuZFoaZa6VSoJGZPBSWGYKDy+A6imJbL63bPurojqink8n4OCzRhXqsXXNQbwtpjOSMKtCXS/ijLQ==",
+  "dgSpecHash": "UQSQ3vCKfySvi4K1cyJYkatOSt/dUYVhsBNbgIMTsKalC6KcsZJWLztEEZ3OEzezTy4Z40lpYOO7ac05gkIojQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Data\\Data.csproj",
+  "projectFilePath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Data\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\S2-PC00\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\S2-PC00\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
