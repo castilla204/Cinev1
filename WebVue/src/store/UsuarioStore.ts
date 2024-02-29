@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import sha256 from 'crypto-js/sha256';
 
 export const useUsuariosStore = defineStore({
   id: 'usuarios',
@@ -7,52 +8,61 @@ export const useUsuariosStore = defineStore({
     currentUser: null,
   }),
   actions: {
-    async login(credenciales: { correoElectronico: string; contrasena: string }) {
+    async login(credenciales) {
       try {
-        const response = await fetch('http://localhost:8001/Usuario', {
+        const ContraHasheada = sha256(credenciales.contrasena).toString();
+        const ContraHasheadaBase64 = btoa(ContraHasheada);
+
+        const response = await fetch('http://localhost:8001/Usuario/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(credenciales),
+          body: JSON.stringify({
+            usuario: credenciales.usuario,
+            passwordHasheada: ContraHasheadaBase64,
+          }),
         });
+
         if (response.ok) {
-          const data = await response.json();
-          if (data.length > 0) {
-            this.loggedIn = true;
-            this.currentUser = data[0];
-          } else {
-            console.error('Credenciales inválidas');
-            throw new Error('Credenciales inválidas'); 
-          }
+          const userData = await response.json();
+          this.loggedIn = true;
+          this.currentUser = userData;
         } else {
-          console.error('Error al iniciar sesión:', response.statusText);
-          throw new Error(response.statusText);
+          console.error('Error al iniciar sesion:', response.statusText);
+          this.loggedIn = false;
+          this.currentUser = null;
+          throw new Error('Error al iniciar sesión: ' + response.statusText);
         }
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
-        throw error; 
+        this.loggedIn = false;
+        this.currentUser = null;
+        throw error;
       }
     },
-    async register(nuevoUsuario: {
-      nombre: string;
-      correoElectronico: string;
-      contrasena: string;
-      rol: number;
-    }) {
+    async register(nuevoUsuario) {
       try {
+        const ContraHasheada = sha256(nuevoUsuario.contrasena).toString();
+
         const response = await fetch('http://localhost:8001/Usuario', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(nuevoUsuario),
+          body: JSON.stringify({
+            nombre: nuevoUsuario.nombre,
+            correoElectronico: nuevoUsuario.correoElectronico,
+            contrasena: ContraHasheada,
+            rol: nuevoUsuario.rol
+          }),
         });
+
         if (response.ok) {
           console.log('Usuario registrado exitosamente');
         } else {
           console.error('Error al registrar usuario:', response.statusText);
-          throw new Error(response.statusText); 
+          throw new Error('Error al registrar usuario: ' + response.statusText); 
         }
       } catch (error) {
         console.error('Error al registrar usuario:', error);

@@ -1,17 +1,30 @@
 <template>
   <header>
-      <nav class="header">
-          <div class="left">
-              <img src="../../multimedia/logosinletra.svg" class="logocine">
-          </div>
-          <ul class="right">
-              <li><a href="index.html" class="promo">Promos</a></li>
-              <li><a href="index.html" class="pelis">Películas</a></li>
-              <li><a href="index.html" class="billetes">Boletos</a></li>
-          </ul>
-      </nav>
+    <nav class="header">
+      <div class="left">
+        <img src="../../multimedia/logosinletra.svg" class="logocine">
+      </div>
+      <ul class="right">
+        <li><a href="index.html" class="promo">Promos</a></li>
+        <li><a href="index.html" class="pelis">Películas</a></li>
+        <li><a href="index.html" class="billetes">Boletos</a></li>
+        <li v-if="!loggedIn"><a href="login.html" class="login">Iniciar sesión</a></li>
+        <li v-if="loggedIn"><a href="#" class="user">Bienvenido, {{ currentUser.nombre }}</a></li>
+        <li v-if="loggedIn"><a href="#" @click="performLogout" class="logout">Cerrar sesión</a></li>
+      </ul>
+    </nav>
   </header>
 </template>
+
+<script setup>
+import { useUsuariosStore } from '../store/UsuarioStore'; 
+
+const { loggedIn, currentUser, logout } = useUsuariosStore();
+
+const performLogout = () => {
+  logout();
+};
+</script>
 
 <style>
 .header {
@@ -45,7 +58,10 @@
 
 .promo,
 .pelis,
-.billetes {
+.billetes,
+.login,
+.user,
+.logout {
   margin: 10px; 
 }
 
@@ -64,7 +80,7 @@
     font-size: 14px; 
   }
 
-  .promo, .pelis, .billetes {
+  .promo, .pelis, .billetes, .login, .user, .logout {
     margin: 0 10px; 
   }
 }
