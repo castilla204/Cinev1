@@ -14,42 +14,58 @@
 </template>
 
 <style>
-/* Header */
 .header {
   background-color: rgb(196, 0, 0);
-  height: 90px;
+  height: auto;
   display: flex;
+  flex-wrap: wrap; 
   justify-content: space-between;
   align-items: center;
   font-family: 'Helvetica';
 }
 
 .logocine {
-  height: 60px;
+  height: 60px; 
 }
 
 .right {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: center;
   list-style: none;
   font-size: 20px;
+  flex-wrap: wrap;
+  margin: 0;
 }
 
 .right a {
   color: white;
-  text-decoration: none; /* Elimina el subrayado */
+  text-decoration: none; 
 }
 
 .promo,
 .pelis,
 .billetes {
-  margin-right: 30px;
-  margin-left: 30px;
+  margin: 10px; 
 }
 
 .left,
 .right {
-  margin: 20px 40px;
+  margin: 20px;
 }
-/* Header */
+
+@media (max-width: 768px) {
+  .header {
+    justify-content: center; 
+  }
+
+  .right {
+    justify-content: center;
+    font-size: 14px; 
+  }
+
+  .promo, .pelis, .billetes {
+    margin: 0 10px; 
+  }
+}
 </style>

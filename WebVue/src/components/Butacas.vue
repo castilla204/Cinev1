@@ -20,6 +20,8 @@
           <path fill="#f4af42" d="M4 9h3v6H4zM17 9h3v6h-3z"/>
         </svg>
       </div>
+      
+      <div class="pantallaCine"></div>
       <button @click="realizarReserva" :disabled="butacaSeleccionada.length === 0" class="botonReserva">Reservar</button>
     </div>
   </div>
@@ -101,52 +103,74 @@ export default defineComponent({
 
 .contenedorButacas {
   background-color: #f0f0f0;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
+  border-radius: 10px; 
+  padding: px;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.5); 
+  margin-top: 10px; 
 }
 
 .titulo {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #ffffff;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-family: 'Helvetica';
- margin-top: 15px;
+  margin-top: 4%; 
 }
 
 .fila {
   display: flex;
+  justify-content: center; 
 }
 
 .butaca {
-  margin: 5px;
+  margin: 0px; 
   cursor: pointer;
+}
+.butaca:hover svg{
+  transform: scale(1.2); 
+}
+
+.pantallaCine {
+  width: 80%; 
+  height: 15px;
+  background-color: #949494;
+  margin: 10px auto; 
+  border-radius: 2px;
 }
 
 .botonReserva {
   background-color: #4CAF50;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 20px; 
   text-align: center;
-  font-size: 16px;
-  margin-top: 20px;
+  font-size: 14px;
+  margin-top: 10px; 
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .ocupada path {
-  fill: red ; /* Importante para sobrescribir otros colores */
-  opacity: 20%;
+  opacity: 20%; 
+  fill: rgb(255, 30, 0);
 }
-
 .seleccionada path {
-  fill: blue;
-  opacity: 20%;
+opacity: 20%;
+fill: blue;}
+
+
+svg {
+  width: 80px; 
+  height: 80px;
 }
 
-.botonReserva:hover {
-  background-color: #45a049;
+@media screen and (max-width: 768px) {
+  svg {
+    width: 40px; 
+    height: 80px;
+  }
 }
+
+
 </style>
