@@ -104,23 +104,187 @@ namespace ApiPeliculas.Data
             );
 
             modelBuilder.Entity<Sesion>().HasData(
-                new Sesion{
-                    SesionID=1,
-                    PeliculaID=1,
-                    SalaID=1,
-                    FechaHora=new DateTime(2024, 2, 29, 21, 30, 0)
-                },
-                new Sesion{
-                    SesionID=2,
-                    PeliculaID=2,
-                    SalaID=2,
-                    FechaHora=new DateTime(2024, 2, 28, 19, 0, 0)
-                }
-            );
+               new Sesion{
+        SesionID=1,
+        PeliculaID=1,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 2, 29, 21, 30, 0)
+    },
+    new Sesion{
+        SesionID=2,
+        PeliculaID=1,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 1, 15, 0, 0)
+    },
+    new Sesion{
+        SesionID=3,
+        PeliculaID=1,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 2, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=4,
+        PeliculaID=2,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 1, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=5,
+        PeliculaID=2,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 2, 16, 0, 0)
+    },
+    new Sesion{
+        SesionID=6,
+        PeliculaID=3,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 1, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=7,
+        PeliculaID=3,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 1, 22, 0, 0)
+    },
+    new Sesion{
+        SesionID=8,
+        PeliculaID=3,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 2, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=9,
+        PeliculaID=3,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 3, 17, 0, 0)
+    },
+  
+    new Sesion{
+        SesionID=10,
+        PeliculaID=4,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 2, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=11,
+        PeliculaID=4,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 3, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=12,
+        PeliculaID=5,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 2, 21, 0, 0)
+    },
+    new Sesion{
+        SesionID=13,
+        PeliculaID=5,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 3, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=14,
+        PeliculaID=6,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 1, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=15,
+        PeliculaID=6,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 2, 17, 0, 0)
+    },
+    new Sesion{
+        SesionID=16,
+        PeliculaID=7,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 1, 17, 0, 0)
+    },
+    new Sesion{
+        SesionID=17,
+        PeliculaID=7,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 2, 19, 0, 0)
+    },
+    
+    new Sesion{
+        SesionID=18,
+        PeliculaID=8,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 1, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=19,
+        PeliculaID=8,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 2, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=20,
+        PeliculaID=8,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 3, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=21,
+        PeliculaID=8,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 4, 17, 0, 0)
+    },
+    new Sesion{
+        SesionID=22,
+        PeliculaID=9,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 2, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=23,
+        PeliculaID=9,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 3, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=24,
+        PeliculaID=9,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 4, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=25,
+        PeliculaID=9,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 5, 17, 0, 0)
+    },
+    new Sesion{
+        SesionID=26,
+        PeliculaID=10,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 3, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=27,
+        PeliculaID=10,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 4, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=28,
+        PeliculaID=10,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 5, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=29,
+        PeliculaID=10,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 6, 17, 0, 0)
+    }
+    );
         
 
 
-            //Creacion de salas y sus correspondientes butacas estas creadas automaticamente para las salas por defecto.
+            
             var salas = new List<Sala>
             {
                 new Sala { SalaID = 1, NombreSala = "Sala 1" },
@@ -159,6 +323,13 @@ namespace ApiPeliculas.Data
                     Nombre="Juan",
                     CorreoElectronico="Alonsoalvira@gmail.com",
                     Contrasena="1234",
+                    Rol=RolAlumno.Administrador
+                },
+                    new Usuario{
+                    UsuarioID=2,
+                    Nombre="admin",
+                    CorreoElectronico="admin@gmail.com",
+                    Contrasena="admin",
                     Rol=RolAlumno.Administrador
                 }
 
