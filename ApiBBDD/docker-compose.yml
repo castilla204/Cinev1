@@ -32,3 +32,14 @@ services:
       - db
     environment:
       - DOCKER_CONTAINER=true
+
+  frontend:
+    build:
+      context: ./frontend  
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    networks:
+      - backend
+    depends_on:
+      - api

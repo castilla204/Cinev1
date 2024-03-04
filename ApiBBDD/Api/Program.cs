@@ -25,7 +25,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
         {
             options.AddPolicy("CineVue",
                 builder => builder
-                    .WithOrigins("http://localhost:5173") 
+                    .WithOrigins("http://localhost:5173", "http://localhost:8000") 
                     .AllowAnyMethod()
                     .AllowAnyHeader());
         });
